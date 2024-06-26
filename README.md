@@ -1,15 +1,31 @@
 
-# Links
+# Final Models
 
-| Item | Link | Desc |
-|------|------|------|
-|Final Models | Next section of this readme | List of final models produced in the paper |
-|Practioner Tool | [Somelink]() | Code for inputing measurements and computing all models discussed in the paper |
-|Common Expansions | [Expansions](EXPANSIONS.md) | Continued fraction expansions for common functions like $sin(x)$, $log(x)$, $e^x$ which demonstrate the possible transformations that will be explored during $CFR_{dd}$ training process |
+This repository provides the final models as supplementary material to the paper 'Sex-specific dimensionless indices for body fat prediction using Continued Fraction Regression'
+
+Additionally, common continued fraction expansions are available in the [Expansions](EXPANSIONS.md)
+
+Please cite as:
+
+```
+@misc{Ciezak-2024,
+    author      = {Andrew Ciezak and Pablo Moscato},
+    title       = {Sex-specific dimensionless indices for body fat prediction using Continued Fraction Regression},
+    series      = {},
+    year        = {2024},
+    pages       = {},
+    numpages    = {},
+    url         = {},
+    doi         = {},
+    isbn        = {},
+    publisher   = {},
+    address     = {},
+}
+```
 
 # Model Results
 
-These models are output of the paper 'Sex-Specific Dimensionless Indices for Body Fat Prediction: Beyond BMI Using Continued Fraction Regression' submitted as part of Genetic and Evolutionary Computation Conference (GECCO) 2024. 
+These models are output of the paper 'Sex-Specific Dimensionless Indices for Body Fat Prediction: Beyond BMI Using Continued Fraction Regression'.
 
 We define indices $\mathcal{I}(x)$ generated from our employed approach $CFR_{dd}$ that takes as inputs $\mathbf{y}' = CFR_{dd}(\mathbf{y},\mathbf{x},\mathbf{w})$ where
 - $\mathbf{y}$ is the 1d array of sample PBF values (target variable)
