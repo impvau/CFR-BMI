@@ -17,7 +17,7 @@ We define indices $\mathcal{I}(x)$ generated from our employed approach $CFR_{dd
 - $\mathbf{w}$ is the 1d array of sample weights for a specific dimensional or dimensionless variable
 - $\mathbf{y}$' is the 1d array of sample PBF values (target variable)
 - The vectors of $\mathbf{y}', \mathbf{y},\mathbf{x},\mathbf{w}$ have $n$ elements representing values for each of the $n$ samples in the dataset
-- The objective function uses the weighted Pearson correlation defined as $R_w(x, y) = \frac{\sum\limits_{i=1}^{n} w_i (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits_{i=1}^{n} w_i (x_i - \bar{x})^2} \sqrt{\sum\limits_{i=1}^{n} w_i (y_i - \bar{y})^2}}$
+- The objective function uses the weighted Pearson correlation defined as $R(x, y) = \frac{\sum\limits_{i=1}^{n} w_i (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits_{i=1}^{n} w_i (x_i - \bar{x})^2} \sqrt{\sum\limits_{i=1}^{n} w_i (y_i - \bar{y})^2}}$
 - The correlations are based on the training datasets
 
 See the [male]() and [female]() result files for models containing more decimal places.
@@ -26,7 +26,7 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 
 ## Female Indicies
 
-| Equation | Description | CF  | Depth | Simplified via Mathematica |$R_w$|
+| Equation | Description | CF  | Depth | Simplified via Mathematica |$R$|
 |----------|-----|-----------|---------|-----|----|
 | $\mathcal{I}_w\left(x=\dfrac{h}{wa}\right)$  | Index of the most correlated dimensionless variable for the female dataset | $16x+3+\dfrac{15x+2}{x+5+\dfrac{1}{-3x+2+\dfrac{12}{4x+\dfrac{17}{6x-15}}}}$ | 4 | $\dfrac{1152x^5+3408x^4-19920x^3+9050x^2+15899x+2431}{72x^4+132x^3-1065x^2+701x+713}$ | $0.7870$ |
 | $\mathcal{I}_w\left(x=\dfrac{ll}{tr}\right)$   | Index of the second most correlated and independent dimensionless variable for the female dataset | $-571+\dfrac{2218x+54}{x+21+\dfrac{293x-148}{-3x-232+\dfrac{1153}{916}}}$ | 3 | $\dfrac{4525956x^2+468554945x-2600401711}{2748x^2+679x+4574107}$ | $0.7335$ |
@@ -38,7 +38,7 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 
 ## Female Models
 
-|Desc| Model| $R_w$| Depth |
+|Desc| Model| $R$| Depth |
 |----|-----|------|-----|
 |Model from the most corrleated dimensionless index|$\mathcal{M}_{6}\left(x=\mathcal{I}\left(\dfrac{h}{wa}\right)\right)=-0.98x+72.94+\dfrac{8404.05}{-190.53x-\dfrac{5.7}{-9.34+\dfrac{-20.68x+175.91}{-2.75x+39.74}}}$| $0.7874$| 3 |
 |Model from the lest correlated dimensionless index| $\mathcal{M}_{7}\left(x=\mathcal{I}\left(\dfrac{th}{ll}\right)\right)=(-0.017x-22.65) $ | $0.6540$ | 0 |
@@ -52,7 +52,7 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 
 ## Male Indices
 
-| Equation | Description | CF  | Depth | Simplified via Mathematica | $R_w$|
+| Equation | Description | CF  | Depth | Simplified via Mathematica | $R$|
 |----------|-----|-----------|---------|-----|---|
 | $\mathcal{I}_m\left(x=\dfrac{h}{wa}\right)$  | Index of the most correlated dimensionless variable for the male dataset | $-59x+25+\dfrac{55x+51}{-63x+179}$ | 1 | $\dfrac{3717x^2-12081x+4526}{179-63x}$ | $0.8537$ |
 | $\mathcal{I}_m\left(x=\dfrac{tr}{ll}\right)$   | Index of the second most correlated and independent dimensionless variable for the male dataset  | $-21x+17+\dfrac{13x-57}{-x-21+\dfrac{-21x+30}{-30x+1-\dfrac{1}{23x}}}$ | 3 | $-\dfrac{14490x^4+290904x^3-272989x^2-1771x-414}{690x^3+13984x^2+208x+21}$ | $0.7795$ |
@@ -64,7 +64,7 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 
 ## Male Models
 
-|Desc| Model| $R_w$| Depth |
+|Desc| Model| $R$| Depth |
 |----|-----|------|------|
 |Model from the most corrleated dimensionless index|$\mathcal{M}_{6}\left(x=\mathcal{I}\left(\dfrac{h}{wa}\right)\right)=0.3749x+57.56$| $0.8537$ | 0 |
 |Model from the lest correlated dimensionless index| $\mathcal{M}_{7}\left(x=\mathcal{I}\left(\dfrac{ll}{ss}\right)\right)=-1.12x-139.32$ | $0.7182$ | 0 |
