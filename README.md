@@ -50,7 +50,7 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 | $BMI$   |  | $\dfrac{we}{h^2}$  | - | - | $0.7822$ |
 | $BMI_T$   |  | $\dfrac{we}{h^{2.5}}$  | - | - | $0.7825$ |
 | $ABSI$   |  | $\dfrac{wa}{BMI^{\frac{2}{3}}\cdot \sqrt{h}}$  | - | - | $0.1637$ |
-| $BRI$   |  | $364.2 - 365.5 \: \sqrt{ 1 - \left( \dfrac{(wa/(2 \: \pi))}{(0.5 \times h)}^2 \right)}$  | - | - | $0.7454$ |
+| $BRI$   |  | $364.2 - 365.5 \: \sqrt{ 1 - \left( \dfrac{(wa/(2 \: \pi))^2}{(0.5 \times h)^2} \right)}$  | - | - | $0.7454$ |
 
 ## Female Models
 
