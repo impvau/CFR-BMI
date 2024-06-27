@@ -47,10 +47,12 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 | $\mathcal{I}_w\left(x=\dfrac{h}{wa}\right)$  | Index of the most correlated dimensionless variable for the female dataset | $16x+3+\dfrac{15x+2}{x+5+\dfrac{1}{-3x+2+\dfrac{12}{4x+\dfrac{17}{6x-15}}}}$ | 4 | $\dfrac{1152x^5+3408x^4-19920x^3+9050x^2+15899x+2431}{72x^4+132x^3-1065x^2+701x+713}$ | $0.7870$ |
 | $\mathcal{I}_w\left(x=\dfrac{ll}{tr}\right)$   | Index of the second most correlated and independent dimensionless variable for the female dataset | $-571+\dfrac{2218x+54}{x+21+\dfrac{293x-148}{-3x-232+\dfrac{1153}{916}}}$ | 3 | $\dfrac{4525956x^2+468554945x-2600401711}{2748x^2+679x+4574107}$ | $0.7335$ |
 | $\mathcal{I}_w\left(x=\dfrac{th}{ll}\right)$   | Index of the least correlated dimensionless variable when selecting independent incidies until all base variables appear in a model.   | $-1762+\dfrac{2696}{-x-\frac{-5918x+8383}{2014x}}$  |2 | $\dfrac{5429744x}{2014x^2-5918x+8383}-1762$ | $0.6541$ |
+<!--
 | $BMI$   |  | $\dfrac{we}{h^2}$  | - | - | $0.7822$ |
 | $BMI_T$   |  | $\dfrac{we}{h^{2.5}}$  | - | - | $0.7825$ |
 | $ABSI$   |  | $\dfrac{wa}{BMI^{\frac{2}{3}}\cdot \sqrt{h}}$  | - | - | $0.1637$ |
 | $BRI$   |  | $364.2 - 365.5 \: \sqrt{ 1 - \left( \dfrac{(wa/(2 \: \pi))^2}{(0.5 \times h)^2} \right)}$  | - | - | $0.7454$ |
+-->
 
 ## Female Models
 
@@ -73,10 +75,12 @@ The primary paper contiains the RMSE scores and classification accuracies in the
 | $\mathcal{I}_m\left(x=\dfrac{h}{wa}\right)$  | Index of the most correlated dimensionless variable for the male dataset | $-59x+25+\dfrac{55x+51}{-63x+179}$ | 1 | $\dfrac{3717x^2-12081x+4526}{179-63x}$ | $0.8537$ |
 | $\mathcal{I}_m\left(x=\dfrac{tr}{ll}\right)$   | Index of the second most correlated and independent dimensionless variable for the male dataset  | $-21x+17+\dfrac{13x-57}{-x-21+\dfrac{-21x+30}{-30x+1-\dfrac{1}{23x}}}$ | 3 | $-\dfrac{14490x^4+290904x^3-272989x^2-1771x-414}{690x^3+13984x^2+208x+21}$ | $0.7795$ |
 | $\mathcal{I}_m\left(x=\dfrac{ll}{ss}\right)$   | Index of the least correlated dimensionless variable when selecting independent incidies until all base variables appear in a model. | $-161+\dfrac{-120x-60}{-11-\dfrac{187}{-1+\dfrac{435}{x+221}}}$ | 3 | $-\dfrac{120x^2+2716x+7019801}{176x+43681}$ | $0.7182$ |
+<!--
 | $BMI$   |  | $\dfrac{we}{h^2}$  | - | | $0.7224$ |
 | $BMI_T$   |  | $\dfrac{we}{h^{2.5}}$  | - |  | $0.7233$ |
 | $ABSI$   |  | $\dfrac{wa}{BMI^{\frac{2}{3}}\cdot \sqrt{h}}$  | - |  | $0.5504$ |
 | $BRI$   |  | $364.2 - 365.5 \: \sqrt{ 1 - \left( \dfrac{(wa/(2 \: \pi))}{(0.5 \times h)}^2 \right)}$  | - |  | $0.8309$ |
+-->
 
 ## Male Models
 
