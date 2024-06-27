@@ -5,9 +5,9 @@
 
 $\sin(x) = \cfrac{x}{1 + \cfrac{x^2}{(2 \cdot 3) + \cfrac{(2 \cdot 3)x^2}{(4 \cdot 5) + \cfrac{(4 \cdot 5)x^2}{(6 \cdot 7) + \cfrac{(6 \cdot 7)x^2}{(8 \cdot 9) + \ddots }}}}}$
 
-## $ tanh(x) $
+## $tanh(x)$
 
-$ tanh(x)=\dfrac{x}{1+\dfrac{x^2}{3+\dfrac{x^2}{5+\dfrac{x^2}{5+\ddots}}}} $
+$tanh(x)=\dfrac{x}{1+\dfrac{x^2}{3+\dfrac{x^2}{5+\dfrac{x^2}{5+\ddots}}}} $
 
 ## $sqrt(x)$
 
