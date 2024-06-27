@@ -1,0 +1,178 @@
+<form id="calculationForm" style="display: grid; grid-template-columns: auto auto; gap: 10px; align-items: center;">
+  <label for="weight">Weight (kg):</label>
+  <input type="number" id="weight" name="weight">
+  
+  <label for="height">Height (cm):</label>
+  <input type="number" id="height" name="height">
+  
+  <label>Sex:</label>
+  <div>
+    <input type="radio" id="male" name="sex" value="male">
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="sex" value="female">
+    <label for="female">Female</label>
+  </div>
+  
+  <label for="age">Age:</label>
+  <input type="number" id="age" name="age">
+  
+  <label for="waist">Waist (cm):</label>
+  <input type="number" id="waist" name="waist">
+  
+  <label for="arm">Arm (cm):</label>
+  <input type="number" id="arm" name="arm">
+  
+  <label for="legLength">Leg Length (Upper) (cm):</label>
+  <input type="number" id="legLength" name="legLength">
+  
+  <label for="subscapularSkinfold">Subscapular Skinfold (mm):</label>
+  <input type="number" id="subscapularSkinfold" name="subscapularSkinfold">
+  
+  <label for="tricepSkinfold">Tricep Skinfold (mm):</label>
+  <input type="number" id="tricepSkinfold" name="tricepSkinfold">
+  
+  <label for="thighCircumference">Thigh Circumference (cm):</label>
+  <input type="number" id="thighCircumference" name="thighCircumference">
+  
+  <input type="button" value="Calculate" onclick="performCalculation()" style="grid-column: span 2; justify-self: center;">
+</form>
+<p id="result"></p>
+
+<script>
+  function performCalculation() {
+    var weight = parseFloat(document.getElementById('weight').value);
+    var height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to meters
+    var sex = document.querySelector('input[name="sex"]:checked').value;
+    var age = parseInt(document.getElementById('age').value);
+    var waist = parseFloat(document.getElementById('waist').value) / 100; // Convert cm to meters
+    var arm = parseFloat(document.getElementById('arm').value) / 100; // Convert cm to meters
+    var legLength = parseFloat(document.getElementById('legLength').value) / 100; // Convert cm to meters
+    var subscapularSkinfold = parseFloat(document.getElementById('subscapularSkinfold').value) / 1000; // Convert mm to meters
+    var tricepSkinfold = parseFloat(document.getElementById('tricepSkinfold').value) / 1000; // Convert mm to meters
+    var thighCircumference = parseFloat(document.getElementById('thighCircumference').value) / 100; // Convert cm to meters
+    
+    var s = (sex === 'female') ? 1 : 0;
+    var s_other = (sex === 'female') ? 0 : 1;
+
+    // Calculate BMI
+    var BMI = weight / (height * height);
+    var BMI_T = 1.3 * weight / Math.pow(height, 2.5);
+    var ABSI = waist / (Math.pow(BMI, 2/3) * Math.sqrt(height));
+    var BRI = 364.2 - 365.5 * Math.sqrt(1 - Math.pow(waist / (2 * Math.PI), 2) / Math.pow((0.5 * height),2));
+
+    var RMF = 64 - 20 * height / waist + 12 * s;
+    var CUN_BAE = -44.988 + (0.503 * age) + (10.689 * s) + (3.172 * BMI) - (0.026 * BMI * BMI) + (0.181 * BMI * s) - (0.02 * BMI * age) - (0.005 * BMI * BMI * s) + (0.0002 * BMI * BMI * age);
+    var Gallagher = 64.5 - (848 * (1 / BMI)) + (0.079 * age) - (16.4 * s_other) + (0.05 * s_other * age) + (39.0 * s_other * (1 / BMI));
+    var Deurenberg = -(11.4 * s_other) + (0.20 * age) + (1.294 * BMI) - 8;
+    var Kagawa = -8.339 + (92.701 * (waist / height)) - (0.078 * age) - (11.062 * s_other);
+
+    var height_waist = height / waist;
+    var M_6 = 0;
+    var I_h_wa_w = (16 * height_waist + 3) + (15 * height_waist + 2) / ((height_waist + 5) + (1) / ((-3 * height_waist + 2) + (12) / ((4 * height_waist) + (17) / ((6 * height_waist) + (-15) / (1)))));
+    var I_h_wa_m = (-59 * height_waist + 25) + (55 * height_waist + 51) / ((-63 * height_waist + 179));
+    if (sex === 'female') {
+      M_6 = (-0.977856436799804 * I_h_wa_w + 72.9406104421655) + (-8404.0489882102) / ((-190.527829548888 * I_h_wa_w) + (-5.70014138670422) / ((-9.34044452748479) + (-20.6793514575633 * I_h_wa_w + 175.906781392201) / ((-2.74694243343273 * I_h_wa_w + 39.7409391820081))));
+    } else {
+      M_6 = (0.374897280712775 * I_h_wa_m + 57.558488243123);
+    }
+
+    var M_7 = 0;
+    var th_ll = thighCircumference / legLength;
+    var ll_ss = legLength / subscapularSkinfold;
+    var i_th_ll_w = (-1762) + (2696) / ((-th_ll) + (-5918 * th_ll + 8383) / ((-2014 * th_ll)));
+    var i_ll_ss_m = (-161) + (-120 * ll_ss - 60) / ((-11) + (-187) / ((-1) + (435) / ((ll_ss + 221))));
+    if (sex === 'female') {
+      M_7 = (-0.0173916249094152 * i_th_ll_w - 22.6507510155806);
+    } else {
+      M_7 = (-1.11722146284432 * i_ll_ss_m - 139.320788766041);
+    }
+
+    var M_8 = 0;
+    if (sex === 'female') {
+      M_8 = (-1.58313386137666 * I_h_wa_w - 0.00645129083768808 * i_th_ll_w) + (93.7128585144743 * I_h_wa_w) / ((0.860055316072978 * I_h_wa_w + 26.6355512251264) + (-34.5492988305502 * i_th_ll_w) / ((3.42539685558261 * i_th_ll_w) + (8.11836848346598 * i_th_ll_w - 8.55658888494773) / ((0.668629012447496 * I_h_wa_w - 41.7518126201111))));
+    } else {
+      M_8 = (65.0882809181139) + (297918.237765487) / ((17.2006033310005 * i_ll_ss_m + 11.4492345940944) + (-50174.4226376033 * i_ll_ss_m - 758772.386818076) / ((15.6730831538501 * I_h_wa_m)));
+    }
+
+    var ll_tr = legLength / tricepSkinfold;
+    var tr_ll = tricepSkinfold / legLength;
+    var i_ll_tr_w = (-571) + (2218 * ll_tr + 54) / ((ll_tr + 21) + (293 * ll_tr - 148) / ((-3 * ll_tr - 232) + (-1153) / (-916)));
+    var i_tr_ll_m = (-21 * tr_ll + 17) + (13 * tr_ll - 57) / ((-tr_ll - 21) + (-21 * tr_ll + 30) / ((-30 * tr_ll + 1) + 1 / (-23 * tr_ll)));
+    var M_9 = 0;
+    if (sex === 'female') {
+      M_9 = (-11.650344787521 * I_h_wa_w + 0.00324523117033153 * i_ll_tr_w + 110.09662852397) + (-1158025.89779843 * I_h_wa_w - 51.7874460658774 * i_ll_tr_w + 2706876.79113222) / ((233.268886176896 * I_h_wa_w - 2.60335887978781 * i_ll_tr_w - 118524.491450211));
+    } else {
+      M_9 = (-2.40357687026517 * i_tr_ll_m + 143.312107365249) + (23.2701251611645 * I_h_wa_m - 208.661347169352 * i_tr_ll_m) / ((73.8014472927522) + (-127.742219079735 * i_tr_ll_m) / ((-10.6361242691862 * I_h_wa_m - 148.253324409362 * i_tr_ll_m) + (105.69008711916 * I_h_wa_m) / (-12.7408186290997)));
+    }
+    
+    var M_10 = 0;
+    if (sex === 'female') {
+      M_10 = (-0.629022286181549 * I_h_wa_w - 0.00405209357899667 * i_ll_tr_w + 0.171561749394061 * weight + 0.116631894655573 * age) + (161.83428076717 * i_ll_tr_w + 780.130692560255 * weight + 834.768363441595 * age - 1750.30490570208) / ((-23.1823526196016 * I_h_wa_w + 3.27069147789892 * i_ll_tr_w + 23.132926488228 * weight + 23.4642326795402 * age));
+    } else {
+        M_10 = (-0.299090128521553 * I_h_wa_m - 7.77209450163907 * i_tr_ll_m - 0.273975886462676 * weight + 0.65127536795471 * age + 154.184411569003) + (26.8921515274643 * I_h_wa_m + 90.7315122803332 * i_tr_ll_m + 14.6685498418259 * weight - 31.66614547326 * age - 236.249455058338) / ((1.13694273296649 * i_tr_ll_m + 29.0599238642572) + (3405039.96727019 * i_tr_ll_m + 2463772.8659011 * age + 8.40105795371226) / ((1800356.74414928 * weight + 2204326.56339965) + (16469628.1265679 * I_h_wa_m + 103290.608853949 * weight - 2694017.59240074) / (-2951139.64468275 * i_tr_ll_m - 3023352.0827253 * weight - 1824579.97116535 * age - 695708.710152426)));
+    }
+    
+    var M_BMI;
+    if (sex === 'female') {
+      M_BMI = 63.561993839709 + (-212.535206113647) / (3.10457257824818 + (4.70715860088791 * BMI) / (17.0184398251751 + (109.240480418452) / (27.8459907905162 + (-8.88961144638343 * BMI) / (3.57808915655928 + (67.6816855431412 * BMI) / (-30.7929726225671 * BMI + 826.446236907632 + 17.3057971023622 / 145.912642717897)))));
+    } else {
+      M_BMI = 56.1614573287993 + 1.03656874847481 / ((-0.00169823911834199 * BMI + 0.0204076940349771) + 2.78592470369536 / ((-9.67820148399113 * BMI) + (-23.7438478942815 * BMI) / ((-5.61520705130439 * BMI) + (13.0837513848553 * BMI) / (22.0668705177364))));
+    }
+
+    var M_BMI_T;
+    if (sex === 'female') {
+      M_BMI_T = 53.5383484859217 + (-291100.77192784) / ((-59.1963135027722 * BMI_T + 8621.06017213513) + (-25007567.0217314 * BMI_T) / ((-268.208833822962 * BMI_T + 19807.8113123425) + (65200539.2628345) / ((-71.7031255384858 * BMI_T + 848.603691152572))));
+    } else {
+      M_BMI_T = (-8.0216052236311 * BMI_T + 28.5247147683677) + (114.96360414731 * BMI_T - 488.640673037464) / ((0.0276634785915097 * BMI_T + 11.349246521481));
+    }
+    
+    var M_ABSI;
+    if (sex === 'female') {
+      M_ABSI = 41.2115384315585 + (1.19033696968131) / ((96.9309355931978 * ABSI) + (-253.151682457618) / ((52.1052173851961) + (16.3072088387805) / ((12.1223413101826 * ABSI) + (-40.0148293865769) / ((105.359784458513 * ABSI + 14.4560357512182)))));
+    } else {
+      M_ABSI = (1996.33649686835 * ABSI - 53.928821619822) + (-113.427381150908 * ABSI - 1622.02532843056) / ((-311.400564797932 * ABSI + 45.391702048174));
+    }
+    
+    var M_BRI;
+    if (sex === 'female') {
+      M_BRI = (1.08151643120239 * BRI + 36.2769747120281) + (-35.9670186629348 * BRI - 1078.69632014524) / ((-61.3637513977444 * BRI + 102.327995652994) + (-885.510405224571 * BRI + 1.47756486884325) / ((-23.2710897593205) + (-1951.73027252215 * BRI) / ((-22.3237671835995 * BRI - 333.771110093467))));
+    } else {
+      M_BRI = (89.3618148134121) + (-31.8765082418912 * BRI - 122.444983086236) / ((0.835971560074746 * BRI) + (5.48197692938657) / ((3.40100465480018) + (39.3731432574679 * BRI) / ((29.1789605001026))));
+    }
+    
+    // Debug output
+    console.log('Weight:', weight);
+    console.log('Height:', height);
+    console.log('Sex:', sex);
+    console.log('Age:', age);
+    console.log('Waist:', waist);
+    console.log('Arm:', arm);
+    console.log('Leg Length:', legLength);
+    console.log('Subscapular Skinfold:', subscapularSkinfold);
+    console.log('Tricep Skinfold:', tricepSkinfold);
+    console.log('Thigh Circumference:', thighCircumference);
+    console.log('BMI:',BMI);
+    console.log('BMI_T:',BMI_T);
+    console.log('ABSI:',ABSI);
+    console.log('BRI:',BRI);
+    
+    var resultText = 
+      'BMI: ' + BMI.toFixed(4) + '<br>' +
+      'RMF: ' + RMF.toFixed(4) + '<br>' +
+      'CUN-BAE: ' + CUN_BAE.toFixed(4) + '<br>' +
+      'Gallagher: ' + Gallagher.toFixed(4) + '<br>' +
+      'Deurenberg: ' + Deurenberg.toFixed(4) + '<br>' +
+      'Kagawa: ' + Kagawa.toFixed(4) + '<br>' +
+      'M<sub>6</sub>: ' + M_6.toFixed(4) + '<br>' +
+      'M<sub>7</sub>: ' + M_7.toFixed(4) + '<br>' +
+      'M<sub>8</sub>: ' + M_8.toFixed(4) + '<br>' +
+      'M<sub>9</sub>: ' + M_9.toFixed(4) + '<br>' +
+      'M<sub>10</sub>: ' + M_10.toFixed(4) + '<br>' +
+      'M<sub>BMI</sub>: ' + M_BMI.toFixed(4) + '<br>' +
+      'M<sub>BMI<sub>T</sub></sub>: ' + M_BMI_T.toFixed(4) + '<br>' +
+      'M<sub>ABSI</sub>: ' + M_ABSI.toFixed(4) + '<br>' +
+      'M<sub>BRI</sub>: ' + M_BRI.toFixed(4) + '<br>';
+
+    document.getElementById('result').innerHTML = resultText;
+  }
+</script>
